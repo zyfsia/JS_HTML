@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Dialog with Checkbox and Input</title>
+  <style>
+    /* dialog {
+      padding: 20px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      width: 300px;
+    }
+    #openDialogBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #myDialog button {
+      margin-top: 20px;
+      padding: 8px 16px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    } */
+  </style>
+</head>
+<body>
+
+  <h1>带表单的自定义对话框</h1>
+  <button id="openDialogBtn" onclick="openDialog()">打开对话框</button>
+
+  <!-- 自定义弹窗 -->
+  <dialog id="myDialog">
+    <form method="dialog">
+      <p>请确认以下信息：</p>
+
+      <label>
+        <input type="checkbox" id="agreeCheckbox">
+        是否同意
+      </label>
+
+      <label>
+        签名：
+        <input type="text" id="signatureInput" placeholder="请输入你的名字">
+      </label>
+
+      <button onclick="submitDialog()">提交</button>
+    </form>
+  </dialog>
+
+  <script>
+    function openDialog() {
+      const dialog = document.getElementById('myDialog');
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal(); 
+      } else {
+        alert("你的浏览器不支持 <dialog> 元素！");
+      }
+    }
+
+    function submitDialog() {
+      const dialog = document.getElementById('myDialog');
+
+      // 在 dialog 范围内查找元素，而不是全局
+      const checkbox = dialog.querySelector('#agreeCheckbox');
+      const input = dialog.querySelector('#signatureInput');
+
+      console.log("是否同意：", checkbox.checked);
+      console.log("签名内容：", input.value);
+
+      dialog.close();
+  }
+  </script>
+
+</body>
+</html>
